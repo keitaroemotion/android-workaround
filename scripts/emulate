@@ -1,0 +1,21 @@
+emulator=$HOME/Library/Android/sdk/emulator/emulator
+devices=$($emulator -list-avds)
+i=0
+
+for device in $devices
+do
+    echo "[$i] $device"
+    ((i=i-1))
+done
+
+printf "Which one?: "
+read input
+
+device=${devices[input]}
+
+if [ -z $device ]; then
+    printf "\nYou need to choose the correct index.\n\n"
+    exit
+fi
+
+$emulator @$device
